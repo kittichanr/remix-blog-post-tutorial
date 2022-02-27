@@ -11,11 +11,11 @@ import {
 
 import globalStylesUrl from './styles/global.css'
 
-import { getUser } from './utils/session.server'
+import { getUser } from '~/utils/session.server'
 
 export const links = () => [{ rel: 'stylesheet', }, { href: globalStylesUrl }]
 
-export function meta() {
+export const meta = () => {
   const description = 'A cool blog built with Remix'
   const keywords = 'remix, react, javascript'
   return { description, keywords };
@@ -23,11 +23,9 @@ export function meta() {
 
 export const loader = async ({ request }) => {
   const user = await getUser(request)
-
   const data = {
-    user
+    user,
   }
-
   return data
 }
 
@@ -41,7 +39,7 @@ export default function App() {
   );
 }
 
-function Document({ children }) {
+function Document({ children,title }) {
   return (
     <html lang="en">
       <head>
@@ -50,6 +48,7 @@ function Document({ children }) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
+        <title>{title ? title : 'Remix Blog'}</title>
       </head>
       <body>
         {children}

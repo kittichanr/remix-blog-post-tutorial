@@ -51,3 +51,15 @@ rm -rf app
 # copy your app over
 cp -R ../my-old-remix-app/app app
 ```
+
+### CMD prisma DB
+```sh
+# use for when update db schema
+npx prisma db push
+# check db on dashboard
+npm prisma studio
+# initial local db when get started or drop db and get new
+node prisma/seed
+```
+
+

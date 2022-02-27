@@ -10,6 +10,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id           String   @id @default(uuid())
+  username     String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  posts        Post[]
+}
+
 model Post {
   id       String   @id @default(uuid())
   userId   String
@@ -18,13 +27,4 @@ model Post {
   body     String
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
-}
-
-model User {
-  id           String   @id @default(uuid())
-  reateAt      DateTime @default(now())
-  updateAt     DateTime @updatedAt
-  username     String   @unique
-  passwordHash String
-  posts        Post[]
 }

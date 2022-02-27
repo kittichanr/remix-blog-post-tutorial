@@ -14,6 +14,7 @@ export const loader = async () => {
             orderBy: {
                 createAt: 'desc'
             }
+            
         })
     }
 

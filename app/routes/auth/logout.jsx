@@ -6,6 +6,6 @@ export const action = async ({ request }) => {
     return logout(request)
 }
 
-export const loader = async ({ request }) => {
+export const loader = async () => {
     return redirect('/')
 }

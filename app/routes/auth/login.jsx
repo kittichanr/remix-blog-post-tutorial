@@ -70,7 +70,7 @@ export const action = async ({ request }) => {
             }
 
             // Create user
-            const user = register({ username, password })
+            const user = await register({ username, password })
             if (!user) {
                 return badRequest({
                     fields,
@@ -110,7 +110,8 @@ function Login() {
                             {' '}Login
                         </label>
                         <label>
-                            <input type="radio" name="loginType" value="register" />
+                            <input type="radio" name="loginType" value="register" defaultChecked={actionData?.fields?.loginType === 'register'}
+                            />
                             {' '}Register
                         </label>
                     </fieldset>
