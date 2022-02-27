@@ -4,8 +4,8 @@
   "description": "",
   "license": "",
   "sideEffects": false,
-  "prisma":{
-    "seed":"node prisma/seed"
+  "prisma": {
+    "seed": "node prisma/seed"
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production remix build",
@@ -17,6 +17,7 @@
     "@prisma/client": "^3.10.0",
     "@remix-run/react": "^1.2.2",
     "@remix-run/serve": "^1.2.2",
+    "bcrypt": "^5.0.1",
     "cross-env": "^7.0.3",
     "prisma": "^3.10.0",
     "react": "^17.0.2",
