@@ -13,6 +13,10 @@ function validateBody(body) {
   }
 }
 
+function badRequest(data) {
+  return json(data, { status: 400 })
+}
+
 export const action = async ({ request }) => {
   const form = await request.formData()
   const title = form.get('title')
@@ -26,7 +30,7 @@ export const action = async ({ request }) => {
   }
 
   if (Object.values(fieldErrors).some(Boolean)) {
-    return json({ fieldErrors, fields }, { status: 400 })
+    return badRequest({ fieldErrors, fields })
   }
 
   const post = await db.post.create({ data: fields })
@@ -47,14 +51,14 @@ function NewPost() {
         <form method='POST'>
           <div className="form-control">
             <label htmlFor="title">Title</label>
-            <input type="text" name='title' id='title' defaultValue={actionData?.fields?.title}/>
+            <input type="text" name='title' id='title' defaultValue={actionData?.fields?.title} />
             <div className="error">
               <p>{actionData?.fieldErrors?.title && (actionData?.fieldErrors?.title)}</p>
             </div>
           </div>
           <div className="form-control">
             <label htmlFor="body">Body</label>
-            <textarea name='body' id='body' defaultValue={actionData?.fields?.body}/>
+            <textarea name='body' id='body' defaultValue={actionData?.fields?.body} />
             <div className="error">
               <p>{actionData?.fieldErrors?.body && (actionData?.fieldErrors?.body)}</p>
             </div>
