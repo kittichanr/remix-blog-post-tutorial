@@ -11,9 +11,20 @@ datasource db {
 }
 
 model Post {
-  id          String @id @default(uuid())
-  title       String
-  body        String
-  createAt    DateTime @default(now())
-  updateAt    DateTime @updatedAt
+  id       String   @id @default(uuid())
+  userId   String
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title    String
+  body     String
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+}
+
+model User {
+  id           String   @id @default(uuid())
+  reateAt      DateTime @default(now())
+  updateAt     DateTime @updatedAt
+  username     String   @unique
+  passwordHash String
+  posts        Post[]
 }
