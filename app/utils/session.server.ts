@@ -3,7 +3,6 @@ import { db } from './db.server'
 import { createCookieSessionStorage, redirect } from 'remix'
 
 // Login user
-
 export async function login({ username, password }) {
     const user = await db.user.findUnique({
         where: {
@@ -19,6 +18,17 @@ export async function login({ username, password }) {
     if (!isCorrectPassword) return null
 
     return user
+}
+
+// Register new user
+export async function register({ username, password }) {
+    const passwordHash = await bcrypt.hash(password, 10)
+    return db.user.create({
+        data: {
+            username,
+            passwordHash
+        }
+    })
 }
 
 // Get session secret
